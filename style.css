@@ -1,4 +1,4 @@
-/* Base styles and transition for theme change */
+/* Base styles and transitions for theme change */
 body {
   transition: background-color 0.3s, color 0.3s;
 }
@@ -15,19 +15,13 @@ body.dark-mode {
   color: #e0e0e0;
 }
 
-/* Navbar customizations if needed */
-.navbar.light-mode {
-  background-color: #f8f9fa !important;
-}
-.navbar.dark-mode {
-  background-color: #333 !important;
-}
-
-/* Additional custom styles */
-h1, h2 {
-  margin-bottom: 20px;
-}
-
-.card {
+/* Navbar transitions */
+.navbar {
   transition: background-color 0.3s, color 0.3s;
+}
+
+/* Optional spacing for sections */
+section {
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
