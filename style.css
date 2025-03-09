@@ -1,27 +1,36 @@
-/* Base styles and transitions for theme change */
 body {
+  padding-top: 56px; /* Navbar fixed top padding */
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Light mode styles */
-body.light-mode {
-  background-color: #ffffff;
-  color: #000000;
-}
-
-/* Dark mode styles */
-body.dark-mode {
+.dark-mode {
   background-color: #121212;
-  color: #e0e0e0;
+  color: #ffffff;
 }
 
-/* Navbar transitions */
-.navbar {
+.light-mode {
+  background-color: #ffffff;
+  color: #212529;
+}
+
+.navbar.dark-mode {
+  background-color: #333 !important;
+}
+
+.card {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Optional spacing for sections */
+.dark-mode {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .card, .dark-mode .navbar {
+  background-color: #1f1f1f !important;
+  color: #ffffff !important;
+}
+
 section {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding: 80px 0;
 }
