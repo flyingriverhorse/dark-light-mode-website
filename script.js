@@ -1,49 +1,34 @@
-const toggleSwitch = document.querySelector('input[type="checkbox"]');
-const nav = document.getElementById('nav');
-const toggleIcon = document.getElementById('toggle-icon');
-const image1 = document.getElementById('image1');
-const image2 = document.getElementById('image2');
-const image3 = document.getElementById('image3');
-const textBox = document.getElementById('text-box');
-
-//Dark or Light Imges
-function imageMode(color) {
-    image1.src = `img/undraw_proud_coder_${color}.svg`; 
-    image2.src = `img/undraw_feeling_proud_${color}.svg`; 
-    image3.src = `img/undraw_conceptual_idea_${color}.svg`; 
-}
-function toggleDarkLightMode(isLight) { 
-    nav.style.backgroundColor =  isLight ? 'rgb(255 255 255 / 50%)' : 'rgb(0 0 0 / 50%)';
-    textBox.style.backgroundColor =isLight ? 'rgb(0 0 0 / 50%)' : 'rgb(255 255 255 / 50%)';
-    toggleIcon.children[0].textContent = isLight ? 'Light Mode' : 'Dark Mode';
-    isLight ? toggleIcon.children[1].classList.replace('fa-moon', 'fa-sun') :
-    toggleIcon.children[1].classList.replace('fa-sun', 'fa-moon'); 
-    isLight ? imageMode('light') : imageMode('dark');
-}
-
-//Switch theme dynamically
-function switchTheme(event){
-    if (event.target.checked) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-        toggleDarkLightMode(false);
-    } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-        toggleDarkLightMode(true);
+document.addEventListener('DOMContentLoaded', function () {
+    const themeSwitch = document.getElementById('themeSwitch');
+    const toggleIcon = document.getElementById('toggle-icon');
+  
+    // Check localStorage for saved theme or default to light mode
+    let theme = localStorage.getItem('theme') || 'light';
+    setTheme(theme);
+    
+    themeSwitch.addEventListener('change', function() {
+      theme = this.checked ? 'dark' : 'light';
+      setTheme(theme);
+      localStorage.setItem('theme', theme);
+    });
+    
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        document.body.classList.remove('light-mode');
+        document.body.classList.add('dark-mode');
+        // Update toggle text and icon
+        toggleIcon.querySelector('.toggle-text').textContent = 'Dark Mode';
+        toggleIcon.querySelector('i').classList.remove('fa-sun');
+        toggleIcon.querySelector('i').classList.add('fa-moon');
+        themeSwitch.checked = true;
+      } else {
+        document.body.classList.remove('dark-mode');
+        document.body.classList.add('light-mode');
+        toggleIcon.querySelector('.toggle-text').textContent = 'Light Mode';
+        toggleIcon.querySelector('i').classList.remove('fa-moon');
+        toggleIcon.querySelector('i').classList.add('fa-sun');
+        themeSwitch.checked = false;
+      }
     }
-}
-
-
-//event listener
-toggleSwitch.addEventListener('change', switchTheme);
-
-//check local storage for theme
-const currentTheme = localStorage.getItem('theme');
-if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-        toggleDarkLightMode(false);
-    }
-}
+  });
+  
